@@ -25,12 +25,13 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 "Plugin 'scrooloose/syntastic'
-Plugin 'nvie/vim-flake8'
+Plugin 'nvie/vim-flake9'
 "Plugin 'davidhalter/jedi-vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'majutsushi/tagbar'
 Plugin 'python-rope/ropevim.git'
+Plugin 'rizzatti/dash.vim'
 "}}}
 
 " General {{{
@@ -65,9 +66,9 @@ set shortmess=atI
 syntax on
 set cursorline
 set cursorcolumn
-set background=dark
+set background=light
 colorscheme zenburn
-"colorscheme solarized
+"colorscheme industry
 
 "Configure backspace to be able to cross to lines
 set backspace=2
