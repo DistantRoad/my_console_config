@@ -11,33 +11,53 @@ set nocompatible
 
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
-"Let vundle manage vundle, required
 Plugin 'gmarik/vundle'
 
-"My bundles:     " 几个配色方案
+"My bundles:
+
+" 几个配色方案
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
 Plugin 'vim-scripts/phd'
 Plugin 'jnurmine/Zenburn'
 
+" Powerline增强显示效果
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" SimpylFold增强折叠代码块的功能
 Plugin 'tmhedberg/SimpylFold'
+
+" NERDTree增加目录树
 Plugin 'scrooloose/nerdtree'
+
+" NERDCommenter增加通用的注释功能
 Plugin 'scrooloose/nerdcommenter'
-"Plugin 'scrooloose/syntastic'
-Plugin 'nvie/vim-flake9'
-"Plugin 'davidhalter/jedi-vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'majutsushi/tagbar'
-Plugin 'python-rope/ropevim.git'
-Plugin 'rizzatti/dash.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'kshenoy/vim-signature'
+Plugin 'dyng/ctrlsf.vim'
+
+let g:Powerline_colorscheme = 'solarized256'
+let python_highlight_all = 1
+
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
 "}}}
 
-" General {{{
+" 通用配置 {{{
 set history=1000
 set ruler
-set relativenumber
+"set relativenumber
 set number
 set showcmd
 set showmode
@@ -46,7 +66,7 @@ set cmdheight=2
 set scrolloff=3
 
 "Fill space between windows
-"set fillchars=stl:,stlnc:\,vert:
+"set fillchars=stlnc:\\,vert:\|
 
 " 禁止光标闪烁
 "set gcra:block-blinkon0
@@ -60,14 +80,14 @@ set guioptions-=m
 set guioptions-=T
 
 "Turn off splash screen
-set shortmess=atI
+set shortmess=I
 
 "syntax and theme
 syntax on
 set cursorline
 set cursorcolumn
-set background=light
-colorscheme zenburn
+set background=dark
+colorscheme solarized
 "colorscheme industry
 
 "Configure backspace to be able to cross to lines
@@ -87,7 +107,7 @@ set nobackup
 set noswapfile
 set autoread
 set autowrite
-set autochdir
+"set autochdir
 set fileencodings=utf-8
 set fileformats=unix,dos,mac
 filetype plugin on
@@ -124,16 +144,16 @@ inoremap jk <esc>
 inoremap <esc> <nop>
 "}}}
 
-
-" Keymap {{{
+" 键盘映射 {{{
 let mapleader=","
-nnoremap <c-s> :w<cr>
 nnoremap <space> za
 
-nnoremap <leader>s :source ~/.vimrc<cr>
-nnoremap <leader>e :vsplit ~/.vimrc<cr>
+nnoremap <leader>e :e ~/.vimrc<cr>
 
-nnoremap <leader>r :w<cr>:!python3 %<cr>
+augroup ft_python
+  au!
+  au FileType python nnoremap <leader>r :w<cr>:!python3 %<cr>
+augroup END
 " 移动分割窗口
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
@@ -145,21 +165,36 @@ cnoremap <C-a> <home>
 cnoremap <C-e> <end> 
 
 map <F5> :NERDTreeToggle<cr>
+
+" 更改配置后自动加载新配置
+"autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "}}}
 
+" 配置插件 {{{
 
-" 配置YCM - - 实验阶段
-
-"let g: SimpylFold_docstring_preview1
-"let g: ycm_autoclose_preview_window_after_completion0
+let g:SimpylFold_docstring_preview = 1
+let g:ycm_autoclose_preview_window_after_completion=0
 let g:ycm_python_binary_path='python3'
-"nnoremap < leader > g: YcmCompleter GoToDefinitionElseDeclaration < cr >
-"nnoremap < leader > d: YcmCompleter GetDoc < cr >
+let g:ycm_min_num_of_chars_for_completion=99
+let g:ycm_key_invoke_completion = '<C-x>'
+let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.'],
+  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \             're!\[.*\]\s'],
+  \   'ocaml' : ['.', '#'],
+  \   'cpp,objcpp' : ['->', '.', '::'],
+  \   'perl' : ['->'],
+  \   'php' : ['->', '::'],
+  \   'cs,java,javascript,typescript,d,perl6,scala,vb,elixir,go' : ['.'],
+  \   'python' : ['re!.*'],
+  \   'ruby' : ['.', '::'],
+  \   'lua' : ['.', ':'],
+  \   'erlang' : [':'],
+  \ }
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<cr>
+nnoremap <leader>d :YcmCompleter GetDoc<cr>
 
-" 配置Jedi
-"let g:jedi  # force_py_version2
 
-" Config Autopep8 {{{    " Do not fix these errors / warnings(default: E226, E24, W6)
 " let g:autopep8_ignore="E501, W293"
 
 " Fix only these errors / warnings(e.g. E4, W)
@@ -187,9 +222,7 @@ let g:autopep8_disable_show_diff=1
 
 "}}}
 
-
 " 杂项 {{{
-filetype indent plugin on
 
 augroup ft_vim
   au!
