@@ -1,9 +1,8 @@
 " ------------------------------------
 "  Name: My Vimrc
 "  Author: Wang Daoyuan
-"  Email: distant - road@hotmail.com
+"  Email: distant-road@hotmail.com
 " ------------------------------------
-
 
 " 插件 {{{
 filetype off
@@ -30,6 +29,10 @@ Plugin 'tmhedberg/SimpylFold'
 " NERDTree增加目录树
 Plugin 'scrooloose/nerdtree'
 
+" 代码块管理
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
 " NERDCommenter增加通用的注释功能
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
@@ -40,6 +43,12 @@ Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'kshenoy/vim-signature'
 Plugin 'dyng/ctrlsf.vim'
+
+
+" 括号自动补全
+Plugin 'Raimondi/delimitMate'
+" 增加Indent文本对象
+Plugin 'michaeljsmith/vim-indent-object'
 
 let g:Powerline_colorscheme = 'solarized256'
 let python_highlight_all = 1
@@ -148,7 +157,7 @@ inoremap <esc> <nop>
 let mapleader=","
 nnoremap <space> za
 
-nnoremap <leader>e :e ~/.vimrc<cr>
+nnoremap <leader>e :e! ~/.vimrc<cr>
 
 augroup ft_python
   au!
@@ -174,7 +183,14 @@ map <F5> :NERDTreeToggle<cr>
 
 let g:SimpylFold_docstring_preview = 1
 let g:ycm_autoclose_preview_window_after_completion=0
+
+"语言关键字补全,不过python关键字都很短，所以，需要的自己打开
 let g:ycm_python_binary_path='python3'
+let g:ycm_seed_identifiers_with_syntax=1   
+let g:ycm_complete_in_comments = 0
+" 不显示文档窗口
+"set completeopt-=preview
+"let g:ycm_add_preview_to_completeopt=0
 let g:ycm_min_num_of_chars_for_completion=99
 let g:ycm_key_invoke_completion = '<C-x>'
 let g:ycm_semantic_triggers =  {
@@ -191,10 +207,18 @@ let g:ycm_semantic_triggers =  {
   \   'lua' : ['.', ':'],
   \   'erlang' : [':'],
   \ }
+let g:ycm_use_ultisnips_completer = 1
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<cr>
 nnoremap <leader>d :YcmCompleter GetDoc<cr>
 
-
+" 解决UltiSnips与YCM插件的冲突
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir = "/Users/wang/UltiSnips"
+let g:UltiSnipsSnippetDirectories=["/Users/wang/UltiSnips"]
+nnoremap <silent> <F9> :TagbarToggle<CR>
 " let g:autopep8_ignore="E501, W293"
 
 " Fix only these errors / warnings(e.g. E4, W)
