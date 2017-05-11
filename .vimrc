@@ -50,6 +50,12 @@ Plugin 'Raimondi/delimitMate'
 " 增加Indent文本对象
 Plugin 'michaeljsmith/vim-indent-object'
 
+Plugin 'nelstrom/vim-markdown-folding'
+
+" 显示Python文件中的IndentLine
+Plugin 'Yggdroot/indentLine'
+
+
 let g:Powerline_colorscheme = 'solarized256'
 let python_highlight_all = 1
 
@@ -73,6 +79,7 @@ set showmode
 set laststatus=2
 set cmdheight=2
 set scrolloff=3
+set foldcolumn=3
 
 "Fill space between windows
 "set fillchars=stlnc:\\,vert:\|
@@ -96,7 +103,7 @@ syntax on
 set cursorline
 set cursorcolumn
 set background=dark
-colorscheme solarized
+colorscheme molokai
 "colorscheme industry
 
 "Configure backspace to be able to cross to lines
@@ -162,6 +169,7 @@ nnoremap <leader>e :e! ~/.vimrc<cr>
 augroup ft_python
   au!
   au FileType python nnoremap <leader>r :w<cr>:!python3 %<cr>
+  au FileType python nnoremap <leader>f m0:Autopep8<cr>`0m0
 augroup END
 " 移动分割窗口
 nnoremap <C-j> <C-W>j
@@ -176,7 +184,7 @@ cnoremap <C-e> <end>
 map <F5> :NERDTreeToggle<cr>
 
 " 更改配置后自动加载新配置
-"autocmd BufWritePost $MYVIMRC source $MYVIMRC
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "}}}
 
 " 配置插件 {{{
@@ -191,6 +199,7 @@ let g:ycm_complete_in_comments = 0
 " 不显示文档窗口
 "set completeopt-=preview
 "let g:ycm_add_preview_to_completeopt=0
+let g:ycm_complete_in_strings = 0
 let g:ycm_min_num_of_chars_for_completion=99
 let g:ycm_key_invoke_completion = '<C-x>'
 let g:ycm_semantic_triggers =  {
@@ -252,4 +261,9 @@ augroup ft_vim
   au!
   au FileType vim setlocal foldmethod=marker
 augroup END
+" 以下代码解决插入模式下光标移动问题
+if &term[:4]=="xterm" || &term[:5] == "screen" || &term[:3]=="rxvt"
+    inoremap <silent> <C-[>OC <right>
+endif
 " "}}}
+
