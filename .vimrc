@@ -35,7 +35,7 @@ Plugin 'honza/vim-snippets'
 
 " NERDCommenter增加通用的注释功能
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tell-k/vim-autopep8'
@@ -55,10 +55,13 @@ Plugin 'nelstrom/vim-markdown-folding'
 " 显示Python文件中的IndentLine
 Plugin 'Yggdroot/indentLine'
 
+" RopeVim重构工具
+Plugin 'python-rope/ropevim'
 
-let g:Powerline_colorscheme = 'solarized256'
-let python_highlight_all = 1
+let g:Powerline_colorscheme='solarized256'
+let python_highlight_all=1
 
+" Syntastic基本配置
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
@@ -67,6 +70,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
+let g:syntastic_quiet_messages = { "level": "warnings" }
+let g:syntastic_python_checkers=["pylint"]
 "}}}
 
 " 通用配置 {{{
@@ -80,6 +85,10 @@ set laststatus=2
 set cmdheight=2
 set scrolloff=3
 set foldcolumn=3
+
+set wildmenu
+set wildmode=longest:full,full
+set splitbelow
 
 "Fill space between windows
 "set fillchars=stlnc:\\,vert:\|
@@ -192,6 +201,7 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 let g:SimpylFold_docstring_preview = 1
 let g:ycm_autoclose_preview_window_after_completion=0
 
+let g:ycm_add_preview_to_completeopt = 1
 "语言关键字补全,不过python关键字都很短，所以，需要的自己打开
 let g:ycm_python_binary_path='python3'
 let g:ycm_seed_identifiers_with_syntax=1   
