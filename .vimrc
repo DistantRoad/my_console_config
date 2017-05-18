@@ -112,7 +112,7 @@ syntax on
 set cursorline
 set cursorcolumn
 set background=dark
-colorscheme molokai
+colorscheme solarized
 "colorscheme industry
 
 "Configure backspace to be able to cross to lines
