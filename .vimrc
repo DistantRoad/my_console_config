@@ -7,9 +7,10 @@
 " 插件 {{{
 filetype off
 set nocompatible
+set encoding=utf8
 
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 Plugin 'gmarik/vundle'
 
 "My bundles:
@@ -17,8 +18,6 @@ Plugin 'gmarik/vundle'
 " 几个配色方案
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
-Plugin 'vim-scripts/phd'
-Plugin 'jnurmine/Zenburn'
 
 " Powerline增强显示效果
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
@@ -30,20 +29,21 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'scrooloose/nerdtree'
 
 " 代码块管理
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
 
 " NERDCommenter增加通用的注释功能
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
+"Plugin 'nvie/vim-flake8'
 Plugin 'Valloric/YouCompleteMe'
+"Plugin 'davidhalter/jedi-vim.git'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'kshenoy/vim-signature'
-Plugin 'dyng/ctrlsf.vim'
-
+"Plugin 'dyng/ctrlsf.vim'
+Plugin 'tpope/vim-fugitive'
 
 " 括号自动补全
 Plugin 'Raimondi/delimitMate'
@@ -55,9 +55,12 @@ Plugin 'nelstrom/vim-markdown-folding'
 " 显示Python文件中的IndentLine
 Plugin 'Yggdroot/indentLine'
 
-" RopeVim重构工具
-Plugin 'python-rope/ropevim'
+Plugin 'iamcco/markdown-preview.vim'
+let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
 
+" RopeVim重构工具
+"Plugin 'python-rope/ropevim'
+call vundle#end()
 let g:Powerline_colorscheme='solarized256'
 let python_highlight_all=1
 
@@ -68,7 +71,7 @@ let python_highlight_all=1
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_quiet_messages = { "level": "warnings" }
 let g:syntastic_python_checkers=["pylint"]
@@ -94,7 +97,7 @@ set splitbelow
 "set fillchars=stlnc:\\,vert:\|
 
 " 禁止光标闪烁
-"set gcra:block-blinkon0
+set gcr=a:block-blinkon0
 " 禁止显示滚动条
 set guioptions-=l
 set guioptions-=L
@@ -103,7 +106,7 @@ set guioptions-=R
 " 禁止显示菜单和工具条
 set guioptions-=m
 set guioptions-=T
-
+set guifont=PragmataPro_for_Powerline:h14
 "Turn off splash screen
 set shortmess=I
 
@@ -112,8 +115,9 @@ syntax on
 set cursorline
 set cursorcolumn
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 "colorscheme industry
+colorscheme molokai
 
 "Configure backspace to be able to cross to lines
 set backspace=2
@@ -166,7 +170,7 @@ nnoremap gj j
 
 " 使用jk键返回
 inoremap jk <esc>
-inoremap <esc> <nop>
+" inoremap <esc> <nop>
 "}}}
 
 " 键盘映射 {{{
