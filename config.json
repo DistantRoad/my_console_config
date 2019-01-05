@@ -1,0 +1,107 @@
+{
+	"bridge": {
+		"name": "Homebridge家庭",
+		"username": "CC:22:3D:E3:CE:31",
+		"port": 51826,
+		"pin": "031-45-154"
+	},
+	"accessories": [],
+	"platforms": [{
+		"platform": "MiOutletPlatform",
+		"deviceCfgs": [{
+			"type": "MiPlugBase",
+			"ip": "192.168.2.101",
+			"token": "c90f0bbf6b1ed68353f8dae5af3c0200",
+			"outletName": "热水器",
+			"outletDisable": false,
+			"temperatureName": "living room outlet temperature",
+			"temperatureDisable": true,
+			"switchLEDName": "living room led light switch",
+			"switchLEDDisable": true
+		},
+		{
+			"type": "MiPlugBase",
+			"ip": "192.168.2.105",
+			"token": "df61d75c8ff102230a0abc29a41bf444",
+			"outletName": "饮水机",
+			"outletDisable": false,
+			"temperatureName": "living room outlet temperature",
+			"temperatureDisable": true,
+			"switchLEDName": "living room led light switch",
+			"switchLEDDisable": true
+		},
+		{
+			"type": "MiPlugBase",
+			"ip": "192.168.2.100",
+			"token": "29770a51499783c30aebb602b8e01525",
+			"outletName": "电暖气",
+			"outletDisable": false,
+			"temperatureName": "living room outlet temperature",
+			"temperatureDisable": true,
+			"switchLEDName": "living room led light switch",
+			"switchLEDDisable": true
+		}]
+	},
+	{
+    "platform": "MiRobotVacuumPlatform",
+    "deviceCfgs": [{
+        "type": "MiRobotVacuum2",
+        "ip": "192.168.2.104",
+        "token": "4c674a4d78504d4344534f676d723438",
+        "robotVacuumName": "扫地机器人",
+        "enablePauseToCharge": true,
+        "robotVacuumDisable": false
+		}]
+	},
+        {
+            "platform": "XiaoMiAcPartner",
+            "devices":{
+                "192.168.2.109":"f9db15cdeeba26dd3d96df257849d29b"
+            },
+            "accessories":[
+                {
+                    "name": "卧室空调",
+                    "type": "climate",
+		    "syncInterval": 2000,
+		    "autoStart": "heat",
+		    "minTemp": 18,
+		    "maxTemp": 30,
+		    "customize": {
+		    	"off": "0100004888023018010083060402000000",
+			"auto": "0100004888023018010083060402000000",
+			"heat": {
+				"18":"0100004888103012110083060000000000",
+				"19":"0100004888103013110083060010000000",
+				"20":"0100004888103014110083060020000000",
+				"21":"0100004888103015110083060030000000",
+				"22":"0100004888103016110083060040000000",
+				"23":"0100004888103017110083060050000000",
+				"24":"0100004888103018110083060060000000",
+				"25":"0100004888103019110083060070000000",
+				"26":"010000488810301a110083060080000000",
+				"27":"010000488810301b110083060090000000",
+				"28":"010000488810301c1100830600A0000000",
+				"29":"010000488810301d1100830600B0000000",
+				"30":"010000488810301e1100830600C0000000"
+			},
+			"cool": {
+				"30":"010000488811301e1100830600C2000000",
+				"29":"010000488811301d1100830600B2000000",
+				"28":"010000488811301c1100830600A2000000",
+				"27":"010000488811301b110083060092000000",
+				"26":"010000488811301a110083060082000000",
+				"25":"0100004888113019110083060072000000",
+				"24":"0100004888113018110083060062000000",
+				"23":"0100004888113017110083060052000000",
+				"22":"0100004888113016110083060042000000",
+				"21":"0100004888113015110083060032000000",
+				"20":"0100004888113014110083060022000000",
+				"19":"0100004888113013110083060012000000",
+				"18":"0100004888113012110083060002000000"
+			}
+		    }
+                }
+            ]
+        }
+	]
+}
